@@ -1,5 +1,4 @@
 # Tockr
-A "pomodoro technique" simulator.
 
 Tockr helps users streamline their day and become more productive.
 
