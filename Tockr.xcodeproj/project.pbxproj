@@ -12,6 +12,7 @@
 		DBFB2586212B6FDF0031186D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBFB2585212B6FDF0031186D /* Assets.xcassets */; };
 		DBFB2589212B6FDF0031186D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBFB2587212B6FDF0031186D /* LaunchScreen.storyboard */; };
 		DBFB2594212B70970031186D /* PomodoroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB2593212B70970031186D /* PomodoroViewController.swift */; };
+		DBFB2596212B7B850031186D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB2595212B7B850031186D /* WelcomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		DBFB2588212B6FDF0031186D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBFB258A212B6FDF0031186D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBFB2593212B70970031186D /* PomodoroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroViewController.swift; sourceTree = "<group>"; };
+		DBFB2595212B7B850031186D /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		DE8C84849C6FE3AF8C411561 /* Pods-Tockr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tockr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tockr/Pods-Tockr.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				DBFB2593212B70970031186D /* PomodoroViewController.swift */,
+				DBFB2595212B7B850031186D /* WelcomeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBFB2596212B7B850031186D /* WelcomeViewController.swift in Sources */,
 				DBFB257F212B6FDD0031186D /* AppDelegate.swift in Sources */,
 				DBFB2594212B70970031186D /* PomodoroViewController.swift in Sources */,
 			);
@@ -345,7 +349,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9F774JFK34;
 				INFOPLIST_FILE = Tockr/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.connorsvrcek.Tockr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -361,7 +369,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9F774JFK34;
 				INFOPLIST_FILE = Tockr/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.connorsvrcek.Tockr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

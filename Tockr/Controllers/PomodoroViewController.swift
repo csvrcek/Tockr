@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UICircularProgressRing
 
 class PomodoroViewController: UIViewController {
     // Declare timer variables
@@ -14,6 +15,19 @@ class PomodoroViewController: UIViewController {
     var seconds = 1500
     var isTimerRunning = false
     var resumeTapped = false
+    
+    // Progress ring for tracking completed pomodoros
+    lazy var progRing: UICircularProgressRingView = {
+        let ring = UICircularProgressRingView(frame: CGRect(x: 50, y: 100, width: 50, height: 50))
+        ring.maxValue = 4
+        ring.ringStyle = .gradient
+        ring.innerRingColor = UIColor.red
+        ring.outerRingColor = UIColor.black
+        ring.innerRingWidth = 1.0
+        ring.outerRingWidth = 2.0
+        ring.valueIndicator = "/4"
+        return ring
+    }()
     
     // Set up the timer
     lazy var timerLabel: UILabel = {
@@ -142,10 +156,17 @@ class PomodoroViewController: UIViewController {
         pause.setTitle("Pause", for: .normal)
     }
     
+    // Set up navigation controller
+    func setupNav() {
+        navigationItem.title = "Tockr"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.white
+        
+        view.addSubview(progRing)
         
         view.addSubview(timerLabel)
         setupTimerConstraints()
@@ -156,5 +177,49 @@ class PomodoroViewController: UIViewController {
         // Disable pause button
         self.pause.isEnabled = false
         self.reset.isEnabled = false
+        
+        setupNav()
+        //navigationController?.present(WelcomeViewController(), animated: true, completion: nil)
+    }
+    
+    override open var shouldAutorotate: Bool {
+        return false
     }
 }
+
+// Disable auto rotation
+extension UINavigationController {
+    override open var shouldAutorotate: Bool {
+        get {
+            if let visibleVC = visibleViewController {
+                return visibleVC.shouldAutorotate
+            }
+            return super.shouldAutorotate
+        }
+    }
+    
+    override open var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation{
+        get {
+            if let visibleVC = visibleViewController {
+                return visibleVC.preferredInterfaceOrientationForPresentation
+            }
+            return super.preferredInterfaceOrientationForPresentation
+        }
+    }
+    
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+        get {
+            if let visibleVC = visibleViewController {
+                return visibleVC.supportedInterfaceOrientations
+            }
+            return super.supportedInterfaceOrientations
+        }
+    }
+}
+
+
+
+
+
+
+
