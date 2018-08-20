@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F78E326591C8B0CD9144CB9 /* Pods_Tockr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CF49336D8CD2D3E337DB02 /* Pods_Tockr.framework */; };
 		DBFB257F212B6FDD0031186D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB257E212B6FDD0031186D /* AppDelegate.swift */; };
 		DBFB2586212B6FDF0031186D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBFB2585212B6FDF0031186D /* Assets.xcassets */; };
 		DBFB2589212B6FDF0031186D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBFB2587212B6FDF0031186D /* LaunchScreen.storyboard */; };
@@ -14,12 +15,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11CF49336D8CD2D3E337DB02 /* Pods_Tockr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tockr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA40D6D6BECEC9BD8445BA2E /* Pods-Tockr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tockr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tockr/Pods-Tockr.release.xcconfig"; sourceTree = "<group>"; };
 		DBFB257B212B6FDD0031186D /* Tockr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tockr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBFB257E212B6FDD0031186D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBFB2585212B6FDF0031186D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBFB2588212B6FDF0031186D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBFB258A212B6FDF0031186D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBFB2593212B70970031186D /* PomodoroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroViewController.swift; sourceTree = "<group>"; };
+		DE8C84849C6FE3AF8C411561 /* Pods-Tockr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tockr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tockr/Pods-Tockr.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,17 +31,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F78E326591C8B0CD9144CB9 /* Pods_Tockr.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E103869AE05A366593ED29D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				11CF49336D8CD2D3E337DB02 /* Pods_Tockr.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DBFB2572212B6FDD0031186D = {
 			isa = PBXGroup;
 			children = (
 				DBFB257D212B6FDD0031186D /* Tockr */,
 				DBFB257C212B6FDD0031186D /* Products */,
+				DE9BDB5B8C5BCB20EF8019D9 /* Pods */,
+				4E103869AE05A366593ED29D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,6 +84,15 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		DE9BDB5B8C5BCB20EF8019D9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DE8C84849C6FE3AF8C411561 /* Pods-Tockr.debug.xcconfig */,
+				CA40D6D6BECEC9BD8445BA2E /* Pods-Tockr.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -76,9 +100,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBFB258D212B6FDF0031186D /* Build configuration list for PBXNativeTarget "Tockr" */;
 			buildPhases = (
+				A4226E8A77CAA3C2056FA006 /* [CP] Check Pods Manifest.lock */,
 				DBFB2577212B6FDD0031186D /* Sources */,
 				DBFB2578212B6FDD0031186D /* Frameworks */,
 				DBFB2579212B6FDD0031186D /* Resources */,
+				74300098FC321557E8E2D3A9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,6 +159,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		74300098FC321557E8E2D3A9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Tockr/Pods-Tockr-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICircularProgressRing.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tockr/Pods-Tockr-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A4226E8A77CAA3C2056FA006 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tockr-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DBFB2577212B6FDD0031186D /* Sources */ = {
@@ -274,15 +339,13 @@
 		};
 		DBFB258E212B6FDF0031186D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE8C84849C6FE3AF8C411561 /* Pods-Tockr.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9F774JFK34;
 				INFOPLIST_FILE = Tockr/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connorsvrcek.Tockr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -292,15 +355,13 @@
 		};
 		DBFB258F212B6FDF0031186D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA40D6D6BECEC9BD8445BA2E /* Pods-Tockr.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9F774JFK34;
 				INFOPLIST_FILE = Tockr/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connorsvrcek.Tockr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
