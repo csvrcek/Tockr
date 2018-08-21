@@ -13,6 +13,8 @@
 		DBFB2589212B6FDF0031186D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBFB2587212B6FDF0031186D /* LaunchScreen.storyboard */; };
 		DBFB2594212B70970031186D /* PomodoroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB2593212B70970031186D /* PomodoroViewController.swift */; };
 		DBFB2596212B7B850031186D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB2595212B7B850031186D /* WelcomeViewController.swift */; };
+		DBFB2599212C96850031186D /* Tockr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBFB2597212C96850031186D /* Tockr.xcdatamodeld */; };
+		DBFB259B212CC4EB0031186D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB259A212CC4EB0031186D /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		DBFB258A212B6FDF0031186D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBFB2593212B70970031186D /* PomodoroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroViewController.swift; sourceTree = "<group>"; };
 		DBFB2595212B7B850031186D /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		DBFB2598212C96850031186D /* Tockr.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tockr.xcdatamodel; sourceTree = "<group>"; };
+		DBFB259A212CC4EB0031186D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DE8C84849C6FE3AF8C411561 /* Pods-Tockr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tockr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tockr/Pods-Tockr.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,10 +74,12 @@
 			isa = PBXGroup;
 			children = (
 				DBFB257E212B6FDD0031186D /* AppDelegate.swift */,
+				DBFB259A212CC4EB0031186D /* Extensions.swift */,
 				DBFB2590212B705C0031186D /* Controllers */,
 				DBFB2585212B6FDF0031186D /* Assets.xcassets */,
 				DBFB2587212B6FDF0031186D /* LaunchScreen.storyboard */,
 				DBFB258A212B6FDF0031186D /* Info.plist */,
+				DBFB2597212C96850031186D /* Tockr.xcdatamodeld */,
 			);
 			path = Tockr;
 			sourceTree = "<group>";
@@ -207,7 +213,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBFB259B212CC4EB0031186D /* Extensions.swift in Sources */,
 				DBFB2596212B7B850031186D /* WelcomeViewController.swift in Sources */,
+				DBFB2599212C96850031186D /* Tockr.xcdatamodeld in Sources */,
 				DBFB257F212B6FDD0031186D /* AppDelegate.swift in Sources */,
 				DBFB2594212B70970031186D /* PomodoroViewController.swift in Sources */,
 			);
@@ -403,6 +411,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DBFB2597212C96850031186D /* Tockr.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DBFB2598212C96850031186D /* Tockr.xcdatamodel */,
+			);
+			currentVersion = DBFB2598212C96850031186D /* Tockr.xcdatamodel */;
+			path = Tockr.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DBFB2573212B6FDD0031186D /* Project object */;
 }

@@ -18,14 +18,13 @@ class PomodoroViewController: UIViewController {
     
     // Progress ring for tracking completed pomodoros
     lazy var progRing: UICircularProgressRingView = {
-        let ring = UICircularProgressRingView(frame: CGRect(x: 50, y: 100, width: 50, height: 50))
+        let ring = UICircularProgressRingView(frame: CGRect(x: 50, y: 100, width: 75, height: 75))
         ring.maxValue = 4
         ring.ringStyle = .gradient
-        ring.innerRingColor = UIColor.red
-        ring.outerRingColor = UIColor.black
-        ring.innerRingWidth = 1.0
-        ring.outerRingWidth = 2.0
+        ring.innerRingWidth = 5.0
+        ring.outerRingWidth = 4.0
         ring.valueIndicator = "/4"
+        ring.gradientColors = [UIColor(hexString: "#0575E6"), UIColor(hexString: "#00F260")]
         return ring
     }()
     
@@ -121,8 +120,11 @@ class PomodoroViewController: UIViewController {
     // Updating each second on the timer
     @objc func updateTimer() {
         if seconds < 1 {
-            timer.invalidate()
             // TODO: send alert to show time's up
+            if progRing.currentValue! < CGFloat(integerLiteral: 4) {
+                progRing.setProgress(value: progRing.currentValue! + 1, animationDuration: 1.0)
+            }
+            timer.invalidate()
         } else {
             seconds -= 1
             timerLabel.text = timeString(time: TimeInterval(seconds))
@@ -147,7 +149,7 @@ class PomodoroViewController: UIViewController {
         timer.invalidate()
         
         timerLabel.text = "25:00"
-        seconds = 1500
+        seconds = 15002
         isTimerRunning = false
         pause.isEnabled = false
         reset.isEnabled = false
