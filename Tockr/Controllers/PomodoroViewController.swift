@@ -176,12 +176,11 @@ class PomodoroViewController: UIViewController {
         view.addSubview(buttonStackView)
         setupButtonStackView()
         
-        // Disable pause button
+        // Disable pause and reset buttons
         self.pause.isEnabled = false
         self.reset.isEnabled = false
         
         setupNav()
-        //navigationController?.present(WelcomeViewController(), animated: true, completion: nil)
     }
     
     override open var shouldAutorotate: Bool {
@@ -189,35 +188,7 @@ class PomodoroViewController: UIViewController {
     }
 }
 
-// Disable auto rotation
-extension UINavigationController {
-    override open var shouldAutorotate: Bool {
-        get {
-            if let visibleVC = visibleViewController {
-                return visibleVC.shouldAutorotate
-            }
-            return super.shouldAutorotate
-        }
-    }
-    
-    override open var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation{
-        get {
-            if let visibleVC = visibleViewController {
-                return visibleVC.preferredInterfaceOrientationForPresentation
-            }
-            return super.preferredInterfaceOrientationForPresentation
-        }
-    }
-    
-    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask{
-        get {
-            if let visibleVC = visibleViewController {
-                return visibleVC.supportedInterfaceOrientations
-            }
-            return super.supportedInterfaceOrientations
-        }
-    }
-}
+
 
 
 

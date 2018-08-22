@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         guard let window: UIWindow = self.window else {fatalError("no window")}
         
-        window.rootViewController = UINavigationController(rootViewController: PomodoroViewController())
+        let nav = UINavigationController(rootViewController: WelcomeViewController())
+        window.rootViewController = nav
         window.makeKeyAndVisible()
         
         return true
