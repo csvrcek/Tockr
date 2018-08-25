@@ -12,11 +12,11 @@ class WelcomeViewController: UIViewController {
     let pickerValues: Array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
     
     lazy var labelStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [welcomeLabel, howManyLabel])
+        let stack = UIStackView(arrangedSubviews: [welcomeLabel, howManyLabel, valuesPickerView])
         stack.axis = .vertical
         stack.distribution = .fillProportionally
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.spacing = 30.0
+        stack.spacing = 20.0
         return stack
     }()
     
@@ -37,27 +37,25 @@ class WelcomeViewController: UIViewController {
         return howMany
     }()
     
-    let valuesPickerView: UIPickerView = {
+    lazy var valuesPickerView: UIPickerView = {
         let picker = UIPickerView()
         return picker
     }()
     
-    
-    
     // Setup the label stack constraints
     func setupLabelStack() {
         labelStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        labelStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 30).isActive = true
+        labelStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80).isActive = true
         labelStack.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -30).isActive = true
     }
     
-    // Setup the picker view constraints
-    func setupValuesPickerView() {
-        valuesPickerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        valuesPickerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
-        valuesPickerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        valuesPickerView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-    }
+//    // Setup the picker view constraints
+//    func setupValuesPickerView() {
+//        valuesPickerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        valuesPickerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
+//        valuesPickerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+//        valuesPickerView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+//    }
     
     // Set labels and background image based on time of day
     func findTimeOfDay() {
@@ -98,13 +96,18 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
         findTimeOfDay()
         
+        valuesPickerView.dataSource = self
+        valuesPickerView.delegate = self
+        
         view.addSubview(labelStack)
         setupLabelStack()
         
-        valuesPickerView.dataSource = self
-        valuesPickerView.delegate = self
-        view.addSubview(valuesPickerView)
-        setupValuesPickerView()
+//        valuesPickerView.subviews[1].backgroundColor = UIColor.white
+//        valuesPickerView.subviews[2].backgroundColor = UIColor.white
+        
+        
+        //view.addSubview(valuesPickerView)
+        //setupValuesPickerView()
     }
     
     // Hide the navbar in this controller
@@ -142,12 +145,23 @@ extension WelcomeViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let attributedString = NSAttributedString(string: String(pickerValues[row]), attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
+        let attributedString = NSAttributedString(string: String(pickerValues[row]), attributes: [NSAttributedStringKey.font:UIFont(name: "Helvetica-Bold", size: 32)!, NSAttributedStringKey.foregroundColor : UIColor.white])
         return attributedString
     }
 }
 
 
+extension UIPickerView {
+    open override func didAddSubview(_ subview: UIView) {
+        super.didAddSubview(subview)
+        
+        if subview.bounds.height < 1.0 {
+            subview.backgroundColor = UIColor.white
+        }
+    }
+    
+    
+}
 
 
 
