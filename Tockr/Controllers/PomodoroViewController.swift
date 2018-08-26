@@ -10,11 +10,21 @@ import UIKit
 import UICircularProgressRing
 
 class PomodoroViewController: UIViewController {
+    init(numPomodoros: Int) {
+        self.numPomodoros = numPomodoros
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // Declare timer variables
     var timer = Timer()
     var seconds = 1500
     var isTimerRunning = false
     var resumeTapped = false
+    var numPomodoros: Int
     
     // Progress ring for tracking completed pomodoros
     lazy var progRing: UICircularProgressRingView = {
@@ -24,6 +34,7 @@ class PomodoroViewController: UIViewController {
         ring.innerRingWidth = 5.0
         ring.outerRingWidth = 4.0
         ring.valueIndicator = "/4"
+        ring.fontColor = UIColor.white
         ring.gradientColors = [UIColor(hexString: "#0575E6"), UIColor(hexString: "#00F260")]
         return ring
     }()
@@ -33,7 +44,8 @@ class PomodoroViewController: UIViewController {
         let timerLabel = UILabel(frame: view.frame)
         timerLabel.text = "25:00"
         timerLabel.textAlignment = .center
-        timerLabel.font = UIFont(name: "HelveticaNeue-Ultralight", size: 100)
+        timerLabel.font = UIFont(name: "Helvetica-Bold", size: 100)
+        timerLabel.textColor = UIColor.white
         return timerLabel
     }()
     
@@ -42,7 +54,7 @@ class PomodoroViewController: UIViewController {
         let start = UIButton()
         //start.layer.cornerRadius = 0.5 * start.bounds.size.width
         start.setTitle("Start", for: .normal)
-        start.setTitleColor(UIColor.black, for: .normal)
+        start.setTitleColor(UIColor.white, for: .normal)
         start.setTitleColor(UIColor.gray, for: .disabled)
         start.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 35)
         start.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
@@ -53,7 +65,7 @@ class PomodoroViewController: UIViewController {
     let pause: UIButton = {
         let pause = UIButton()
         pause.setTitle("Pause", for: .normal)
-        pause.setTitleColor(UIColor.black, for: .normal)
+        pause.setTitleColor(UIColor.white, for: .normal)
         pause.setTitleColor(UIColor.gray, for: .disabled)
         pause.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 35)
         pause.addTarget(self, action: #selector(pauseTimer), for: .touchUpInside)
@@ -64,7 +76,7 @@ class PomodoroViewController: UIViewController {
     let reset: UIButton = {
         let reset = UIButton()
         reset.setTitle("Reset", for: .normal)
-        reset.setTitleColor(UIColor.black, for: .normal)
+        reset.setTitleColor(UIColor.white, for: .normal)
         reset.setTitleColor(UIColor.gray, for: .disabled)
         reset.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 35)
         reset.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
@@ -160,13 +172,18 @@ class PomodoroViewController: UIViewController {
     
     // Set up navigation controller
     func setupNav() {
-        navigationItem.title = "Tockr"
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        // Set the back button color
+        self.navigationController?.navigationBar.tintColor = UIColor.white
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor(hexString: "#FF6347")
         
         view.addSubview(progRing)
         

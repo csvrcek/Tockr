@@ -12,7 +12,7 @@ class WelcomeViewController: UIViewController {
     let pickerValues: Array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
     
     lazy var labelStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [welcomeLabel, howManyLabel, valuesPickerView])
+        let stack = UIStackView(arrangedSubviews: [welcomeLabel, howManyLabel, pomodoroDesc, valuesPickerView, selectButton])
         stack.axis = .vertical
         stack.distribution = .fillProportionally
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -37,25 +37,53 @@ class WelcomeViewController: UIViewController {
         return howMany
     }()
     
-    lazy var valuesPickerView: UIPickerView = {
+    let pomodoroDesc: UILabel = {
+        let desc = UILabel()
+        desc.text = "One pomodoro is 25 minutes long."
+        desc.font = UIFont(name: "Helvetica", size: 18)
+        desc.textColor = UIColor.white
+        return desc
+    }()
+    
+    let valuesPickerView: UIPickerView = {
         let picker = UIPickerView()
         return picker
     }()
     
+    let selectButton: UIButton = {
+        let select = UIButton(type: .system)
+        select.setTitle("Let's go!", for: .normal)
+        select.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 24)
+        select.setTitleColor(UIColor.white, for: .normal)
+        select.layer.borderColor = UIColor.white.cgColor
+        select.layer.cornerRadius = 10.0
+        select.layer.borderWidth = 1.0
+        select.addTarget(self, action: #selector(letsGoOnClick), for: .touchUpInside)
+        return select
+    }()
+    
+    let pomodoroTransition: CATransition = {
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromRight
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        return transition
+    }()
+    
+    @objc func letsGoOnClick() {
+        navigationController?.pushViewController(PomodoroViewController(numPomodoros: pickerValues[valuesPickerView.selectedRow(inComponent: 0)]), animated: true)
+    }
+
     // Setup the label stack constraints
     func setupLabelStack() {
+        // Set the selectButton constraints
+        selectButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
         labelStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        labelStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80).isActive = true
+        labelStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 40).isActive = true
         labelStack.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -30).isActive = true
     }
-    
-//    // Setup the picker view constraints
-//    func setupValuesPickerView() {
-//        valuesPickerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        valuesPickerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
-//        valuesPickerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-//        valuesPickerView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-//    }
     
     // Set labels and background image based on time of day
     func findTimeOfDay() {
@@ -69,6 +97,7 @@ class WelcomeViewController: UIViewController {
             timeOfDay = "afternoon"
             welcomeLabel.textColor = UIColor.black
             howManyLabel.textColor = UIColor.black
+            pomodoroDesc.textColor = UIColor.black
         case 18..<21:
             timeOfDay = "evening"
         default:
@@ -94,6 +123,7 @@ class WelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Welcome"
         findTimeOfDay()
         
         valuesPickerView.dataSource = self
@@ -102,12 +132,7 @@ class WelcomeViewController: UIViewController {
         view.addSubview(labelStack)
         setupLabelStack()
         
-//        valuesPickerView.subviews[1].backgroundColor = UIColor.white
-//        valuesPickerView.subviews[2].backgroundColor = UIColor.white
-        
-        
-        //view.addSubview(valuesPickerView)
-        //setupValuesPickerView()
+        view.window?.layer.add(pomodoroTransition, forKey: kCATransition)
     }
     
     // Hide the navbar in this controller
@@ -149,19 +174,5 @@ extension WelcomeViewController: UIPickerViewDelegate {
         return attributedString
     }
 }
-
-
-extension UIPickerView {
-    open override func didAddSubview(_ subview: UIView) {
-        super.didAddSubview(subview)
-        
-        if subview.bounds.height < 1.0 {
-            subview.backgroundColor = UIColor.white
-        }
-    }
-    
-    
-}
-
 
 
