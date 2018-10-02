@@ -24,11 +24,50 @@ class PomodoroViewController: UIViewController {
     var seconds = 1500
     var isTimerRunning = false
     var resumeTapped = false
+    
     var numPomodoros: Int
     
+    // Stackview for both progress ring stackviews
+    lazy var progRingParentStackView: UIStackView = {
+        let parentStack = UIStackView(arrangedSubviews: [topStackView, bottomStackView])
+        parentStack.axis = .vertical
+        parentStack.backgroundColor = UIColor.blue
+        parentStack.translatesAutoresizingMaskIntoConstraints = false
+        return parentStack
+    }()
+    
+    // Top prog ring stackview
+    lazy var topStackView: UIStackView = {
+        let top = UIStackView(arrangedSubviews: [progRing, timerLabel, progRing])
+        print("the size of the top arrangedSubviews is \(top.arrangedSubviews.count)")
+        top.axis = .horizontal
+        top.distribution = .equalSpacing
+        top.translatesAutoresizingMaskIntoConstraints = false
+        return top
+    }()
+    
+    // Bottom prog ring stackview
+    lazy var bottomStackView: UIStackView = {
+        let bottom = UIStackView(arrangedSubviews: [progRing, progRing, progRing])
+        bottom.axis = .horizontal
+        bottom.distribution = .equalSpacing
+        bottom.translatesAutoresizingMaskIntoConstraints = false
+        return bottom
+    }()
+    
+    // Stackview for buttons
+    lazy var buttonStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [start, pause, reset])
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     // Progress ring for tracking completed pomodoros
-    lazy var progRing: UICircularProgressRingView = {
-        let ring = UICircularProgressRingView(frame: CGRect(x: 50, y: 100, width: 75, height: 75))
+    let progRing: UICircularProgressRingView = {
+        let ring = UICircularProgressRingView()
+        ring.isHidden = true
         ring.maxValue = 4
         ring.ringStyle = .gradient
         ring.innerRingWidth = 5.0
@@ -56,7 +95,7 @@ class PomodoroViewController: UIViewController {
         start.setTitle("Start", for: .normal)
         start.setTitleColor(UIColor.white, for: .normal)
         start.setTitleColor(UIColor.gray, for: .disabled)
-        start.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 35)
+        start.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 32)
         start.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         return start
     }()
@@ -67,7 +106,7 @@ class PomodoroViewController: UIViewController {
         pause.setTitle("Pause", for: .normal)
         pause.setTitleColor(UIColor.white, for: .normal)
         pause.setTitleColor(UIColor.gray, for: .disabled)
-        pause.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 35)
+        pause.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 32)
         pause.addTarget(self, action: #selector(pauseTimer), for: .touchUpInside)
         return pause
     }()
@@ -78,18 +117,9 @@ class PomodoroViewController: UIViewController {
         reset.setTitle("Reset", for: .normal)
         reset.setTitleColor(UIColor.white, for: .normal)
         reset.setTitleColor(UIColor.gray, for: .disabled)
-        reset.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 35)
+        reset.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 32)
         reset.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
         return reset
-    }()
-    
-    // Stackview for buttons
-    lazy var buttonStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [start, pause, reset])
-        stack.axis = .horizontal
-        stack.distribution = .fillEqually
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
     }()
     
     // Set up button stack view constraints
@@ -103,6 +133,31 @@ class PomodoroViewController: UIViewController {
     func setupTimerConstraints() {
         timerLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    // Constrain the stack views for the prog rings
+    func setupProgRingStackViews() {
+        // Parent stack view
+        progRingParentStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        progRingParentStackView.centerYAnchor.constraint(equalTo: timerLabel.centerYAnchor, constant: -150).isActive = true
+        progRingParentStackView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20).isActive = true
+        progRingParentStackView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        // Top stack view
+        topStackView.topAnchor.constraint(equalTo: progRingParentStackView.topAnchor).isActive = true
+        topStackView.heightAnchor.constraint(equalTo: progRingParentStackView.heightAnchor, multiplier: 1/2).isActive = true
+        topStackView.widthAnchor.constraint(equalTo: progRingParentStackView.widthAnchor).isActive = true
+        
+        // Bottom stack view
+        bottomStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor).isActive = true
+        bottomStackView.heightAnchor.constraint(equalTo: progRingParentStackView.heightAnchor, multiplier: 1/2).isActive = true
+        bottomStackView.widthAnchor.constraint(equalTo: progRingParentStackView.widthAnchor).isActive = true
+    }
+    
+    // Constrain progRing
+    func setupProgRing() {
+        progRing.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        progRing.widthAnchor.constraint(equalToConstant: 75).isActive = true
     }
     
     // Displaying timer
@@ -161,7 +216,7 @@ class PomodoroViewController: UIViewController {
         timer.invalidate()
         
         timerLabel.text = "25:00"
-        seconds = 15002
+        seconds = 1500
         isTimerRunning = false
         pause.isEnabled = false
         reset.isEnabled = false
@@ -180,18 +235,39 @@ class PomodoroViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
     }
     
+    // Display the right number of prog rings depending on the number of pomodoros
+    func renderProgRings() {
+//        for _ in 0..<3 {
+//            topStackView.addArrangedSubview(progRing)
+//            bottomStackView.addArrangedSubview(progRing)
+//        }
+        
+        print(topStackView.arrangedSubviews.count)
+        
+        for pom in 0..<numPomodoros {
+            //topStackView.addArrangedSubview(progRing)
+            //bottomStackView.addArrangedSubview(progRing)
+
+            topStackView.arrangedSubviews[pom].isHidden = false
+            bottomStackView.arrangedSubviews[pom].isHidden = false
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor(hexString: "#FF6347")
-        
-        view.addSubview(progRing)
         
         view.addSubview(timerLabel)
         setupTimerConstraints()
         
         view.addSubview(buttonStackView)
         setupButtonStackView()
+        
+        view.addSubview(progRingParentStackView)
+        setupProgRingStackViews()
+        setupProgRing()
+        renderProgRings()
         
         // Disable pause and reset buttons
         self.pause.isEnabled = false
@@ -204,12 +280,3 @@ class PomodoroViewController: UIViewController {
         return false
     }
 }
-
-
-
-
-
-
-
-
-

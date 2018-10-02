@@ -132,7 +132,7 @@ class WelcomeViewController: UIViewController {
         view.addSubview(labelStack)
         setupLabelStack()
         
-        view.window?.layer.add(pomodoroTransition, forKey: kCATransition)
+        //view.window?.layer.add(pomodoroTransition, forKey: kCATransition)
     }
     
     // Hide the navbar in this controller
